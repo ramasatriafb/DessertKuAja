@@ -22,6 +22,53 @@ export default class Login extends Component {
   static navigationOptions = {
     header:null
 }
+  constructor(props) {
+  
+    super(props)
+
+    this.state = {
+
+      usernmae: '',
+      password: ''
+
+    }
+
+  }
+
+  UserLoginFunction = () =>{
+ 
+    const { username }  = this.state ;
+    const { password }  = this.state ;
+    
+    
+    fetch('https://ramasatriafb.000webhostapp.com/index.php/auth/login', {
+      method: 'POST',
+      headers: {
+       'Client-Service': 'frontend-client',
+       'Auth-Key': 'dessertkuajaapi',
+       'Content-Type': 'application/json',
+     },
+     body: JSON.stringify({
+    
+       username: username,
+    
+       password: password
+    
+     })
+    
+   }).then((response) => response.json())
+         .then((responseJson) => {
+    
+           // If server response message same as Data Matched
+           console.log(responseJson);
+           console.warn(xhr.response);
+    
+         }).catch((error) => {
+           console.error(error);
+         });
+    
+     }
+
   render() {
 
     return (
@@ -38,14 +85,15 @@ export default class Login extends Component {
               <Body>
                   <Item>
                     <Icon active name="person" />
-                    <Input placeholder="Email" />
+                    <Input placeholder="Username" onChangeText={(val) => this.setState({username:val})}/>
                   </Item> 
                   <Item>
                     <Icon active name="key" />
-                    <Input placeholder="Password" secureTextEntry />
+                    <Input placeholder="Password" secureTextEntry onChangeText={(val) => this.setState({password:val})}/>
                   </Item>
                 
-                <Button onPress={() => this.props.navigation.navigate('Awal')}   style = {{marginTop: 40, marginBottom: 20, marginLeft:20,marginRight:20}}full rounded info>
+                  <Button onPress={() => this.UserLoginFunction.bind(this)}  style = {{marginTop: 40, marginBottom: 20, marginLeft:20,marginRight:20}}full rounded info>
+                {/* <Button onPress={() => this.props.navigation.navigate('Awal')}   style = {{marginTop: 40, marginBottom: 20, marginLeft:20,marginRight:20}}full rounded info> */}
                   <Text>Login</Text>
                 </Button>
                

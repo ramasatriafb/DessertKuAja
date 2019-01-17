@@ -73,6 +73,10 @@ export default class Profil extends Component {
                  <Label>Nama Kamu </Label>
                  <Input />
                </Item>
+                <Item floatingLabel>
+                  <Label>Username Kamu </Label>
+                  <Input />
+                </Item>
                <Item floatingLabel>
                  <Label>Email Kamu</Label>
                  <Input />
@@ -133,6 +137,10 @@ export default class Profil extends Component {
                  </Picker>
                </Item>
                
+               <Item floatingLabel>
+                  <Label>Asam Urat Kamu (mg/dL)</Label>
+                  <Input />
+                </Item>
                <Item floatingLabel>
                   <Label>Gula Darah Kamu (mg/dL)</Label>
                   <Input />
