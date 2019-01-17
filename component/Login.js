@@ -41,31 +41,7 @@ export default class Login extends Component {
     const { password }  = this.state ;
     
     
-    fetch('https://ramasatriafb.000webhostapp.com/index.php/auth/login', {
-      method: 'POST',
-      headers: {
-       'Client-Service': 'frontend-client',
-       'Auth-Key': 'dessertkuajaapi',
-       'Content-Type': 'application/json',
-     },
-     body: JSON.stringify({
     
-       username: username,
-    
-       password: password
-    
-     })
-    
-   }).then((response) => response.json())
-         .then((responseJson) => {
-    
-           // If server response message same as Data Matched
-           console.log(responseJson);
-           console.warn(xhr.response);
-    
-         }).catch((error) => {
-           console.error(error);
-         });
     
      }
 
@@ -92,8 +68,8 @@ export default class Login extends Component {
                     <Input placeholder="Password" secureTextEntry onChangeText={(val) => this.setState({password:val})}/>
                   </Item>
                 
-                  <Button onPress={() => this.UserLoginFunction.bind(this)}  style = {{marginTop: 40, marginBottom: 20, marginLeft:20,marginRight:20}}full rounded info>
-                {/* <Button onPress={() => this.props.navigation.navigate('Awal')}   style = {{marginTop: 40, marginBottom: 20, marginLeft:20,marginRight:20}}full rounded info> */}
+                  {/* <Button onPress={() => this.UserLoginFunction.bind(this)}  style = {{marginTop: 40, marginBottom: 20, marginLeft:20,marginRight:20}}full rounded info> */}
+                <Button onPress={() => this.props.navigation.navigate('AwalShinta')}   style = {{marginTop: 40, marginBottom: 20, marginLeft:20,marginRight:20}}full rounded info>
                   <Text>Login</Text>
                 </Button>
                

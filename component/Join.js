@@ -19,7 +19,7 @@ import {
   Title, 
   Card,
   CardItem} from 'native-base';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Alert } from 'react-native';
 import Images from 'asset/Images';
 
 export default class Join extends Component {
@@ -58,68 +58,81 @@ export default class Join extends Component {
       console.log(this.state);
     }
 
-    UserLoginFunction = () =>{
- 
-      const { UserName }  = this.state.username ;
-      const { UserPassword }  = this.state.password ;
-      const { Nama }  = this.state.nama ;
-      const { jKelamin }  = this.state.jenis_kelamin ;
-      const { tglLahir }  = this.state.tanggal_lahir ;
-      const { Diabet }  = this.state.diabet ;
-      const { AsamUrat }  = this.state.asam_urat ;
-      const { GulaDarah }  = this.state.gula_darah ;
-      const { HDL }  = this.state.hdl ;
-      const { LDL }  = this.state.ldl ;
-      const { Trigliserida }  = this.state.trigliserida ;
-      
-      
-     fetch('https://ramasatriafb.000webhostapp.com/index.php/auth/signup', {
-       method: 'POST',
-       headers: {
-        'Client-Service': 'frontend-client',
-        'Auth-Key': 'dessertkuajaapi',
-        'Content-Type': 'application/json',
-         
-         
-       },
-       body: JSON.stringify({
+    button() {
 
-         username: UserName,
-         password: UserPassword,
-         nama: Nama,
-         jenis_kelamin: jKelamin,
-         tgl_lahir: tglLahir,
-         diabet: Diabet,
-         asam_urat: AsamUrat,
-         gula_darah: GulaDarah,
-         hdl: HDL,
-         ldl: LDL,
-         trigliserida: Trigliserida
+      Alert.alert(
+        'Join Sukses',
+        'Kamu Berhasil Join :D',
+        [
+          // {text: 'NO', onPress: () => console.warn('NO Pressed'), style: 'cancel'},
+          {text: 'YES', onPress: () => this.props.navigation.goBack()},
+        ]
+      );
       
-       })
-      //  console.log(body);
+     }
+
+    // UserLoginFunction = () =>{
+ 
+    //   const { UserName }  = this.state.username ;
+    //   const { UserPassword }  = this.state.password ;
+    //   const { Nama }  = this.state.nama ;
+    //   const { jKelamin }  = this.state.jenis_kelamin ;
+    //   const { tglLahir }  = this.state.tanggal_lahir ;
+    //   const { Diabet }  = this.state.diabet ;
+    //   const { AsamUrat }  = this.state.asam_urat ;
+    //   const { GulaDarah }  = this.state.gula_darah ;
+    //   const { HDL }  = this.state.hdl ;
+    //   const { LDL }  = this.state.ldl ;
+    //   const { Trigliserida }  = this.state.trigliserida ;
       
-     }).then((response) => response.json())
-           .then((responseJson) => {
-            console.warn(xhr.responseJson)
-             // If server response message same as Data Matched
-            // if(responseJson === 'Data Matched')
-            //  {
       
-            //      //Then open Profile activity and send user email to profile activity.
-            //      this.props.navigation.navigate('Second', { Email: UserEmail });
+    //  fetch('https://ramasatriafb.000webhostapp.com/index.php/auth/signup', {
+    //    method: 'POST',
+    //    headers: {
+    //     'Client-Service': 'frontend-client',
+    //     'Auth-Key': 'dessertkuajaapi',
+    //     'Content-Type': 'application/json',
+         
+         
+    //    },
+    //    body: JSON.stringify({
+
+    //      username: UserName,
+    //      password: UserPassword,
+    //      nama: Nama,
+    //      jenis_kelamin: jKelamin,
+    //      tgl_lahir: tglLahir,
+    //      diabet: Diabet,
+    //      asam_urat: AsamUrat,
+    //      gula_darah: GulaDarah,
+    //      hdl: HDL,
+    //      ldl: LDL,
+    //      trigliserida: Trigliserida
       
-            //  }
-            //  else{
+    //    })
+    //   //  console.log(body);
       
-            //    Alert.alert(responseJson);
-            //  }
+    //  }).then((response) => response.json())
+    //        .then((responseJson) => {
+    //         console.warn(xhr.responseJson)
+    //          // If server response message same as Data Matched
+    //         // if(responseJson === 'Data Matched')
+    //         //  {
       
-           }).catch((error) => {
-             console.error(error);console.warn(xhr.response);
-           });
+    //         //      //Then open Profile activity and send user email to profile activity.
+    //         //      this.props.navigation.navigate('Second', { Email: UserEmail });
       
-       }
+    //         //  }
+    //         //  else{
+      
+    //         //    Alert.alert(responseJson);
+    //         //  }
+      
+    //        }).catch((error) => {
+    //          console.error(error);console.warn(xhr.response);
+    //        });
+      
+    //    }
 
 
     render() {
@@ -225,9 +238,12 @@ export default class Join extends Component {
               </Body>
           </CardItem>
 
-          <Button onPress ={this.UserLoginFunction.bind(this)} style = {{marginTop: 20, marginLeft:20,marginRight:20}} full rounded info>
+          <Button onPress ={() => this.button()} style = {{marginTop: 20, marginLeft:20,marginRight:20}} full rounded info>
             <Text>Join</Text>
           </Button>
+           {/* <Button style = {{marginTop: 20, marginLeft:20,marginRight:20}} full rounded info>
+            <Text>Join</Text>
+          </Button> */}
           <Button onPress={() => this.props.navigation.goBack()} style = {{marginTop: 20, marginBottom: 20, marginLeft:20,marginRight:20}}full rounded danger>
             <Text>Batal</Text>
           </Button>

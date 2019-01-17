@@ -10,6 +10,18 @@ import Join from './component/Join'
 import Awal from './component/Awal'
 import Resep from './component/Detail/Resep'
 import Resep1 from './component/beranda/Resep1'
+
+import AwalShinta from './component/AwalShinta'
+
+import BoardWalnut from './component/berandaShinta/BoardWalnut'
+import CarrotCake from './component/berandaShinta/CarrotCake'
+import PecanPie from './component/berandaShinta/PecanPie'
+import DoublePumpkin from './component/berandaShinta/DoublePumpkin'
+import BananaCake from './component/berandaShinta/BananaCake'
+import CinnamonIce from './component/berandaShinta/CinnamonIce'
+import DeepCake from './component/berandaShinta/DeepCake'
+
+
 const Routes = createStackNavigator({
   Splash: {
     screen: Splash
@@ -28,7 +40,32 @@ const Routes = createStackNavigator({
   },
   Resep1: {
       screen: Resep1
-  }
+  },
+  AwalShinta: {
+    screen: AwalShinta
+  },
+  BoardWalnut:{
+    screen: BoardWalnut
+  },
+  PecanPie:{
+    screen: PecanPie
+  },
+  CarrotCake:{
+    screen: CarrotCake
+  },
+  DoublePumpkin:{
+    screen: DoublePumpkin
+  },
+  BananaCake:{
+    screen: BananaCake
+  },
+  CinnamonIce:{
+    screen: CinnamonIce
+  },
+  DeepCake:{
+    screen: DeepCake
+  },
+
 });
 const Routing = createAppContainer(Routes);
 export default class Main extends React.Component {
