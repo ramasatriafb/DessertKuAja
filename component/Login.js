@@ -15,6 +15,7 @@ import {
   Body,
   Icon
  } from 'native-base';
+ import { Alert } from 'react-native';
 
 import { createStackNavigator, createAppContainer } from 'react-navigation'; 
 import Images from 'asset/Images';
@@ -28,7 +29,7 @@ export default class Login extends Component {
 
     this.state = {
 
-      usernmae: '',
+      username: '',
       password: ''
 
     }
@@ -43,6 +44,33 @@ export default class Login extends Component {
     
     
     
+     }
+
+     button() {
+      if (this.state.username != 'shinta' && this.state.password != 'shinta'){
+        setTimeout(() => {
+        Alert.alert(
+          'Error',
+          'Username & Password Salah',
+          [
+            // {text: 'NO', onPress: () => console.warn('NO Pressed'), style: 'cancel'},
+            {text: 'OK', style: 'cancel'},
+          ]
+        );
+      },5000)
+      }else{
+        setTimeout(() => {
+          Alert.alert(
+            'Login Sukses',
+            'Selamat Datang ',
+            [
+              // {text: 'NO', onPress: () => console.warn('NO Pressed'), style: 'cancel'},
+              {text: 'OK', onPress: () => this.props.navigation.navigate('AwalShinta')},
+            ]
+          );
+      },5000)
+      }
+      
      }
 
   render() {
@@ -68,8 +96,8 @@ export default class Login extends Component {
                     <Input placeholder="Password" secureTextEntry onChangeText={(val) => this.setState({password:val})}/>
                   </Item>
                 
-                  {/* <Button onPress={() => this.UserLoginFunction.bind(this)}  style = {{marginTop: 40, marginBottom: 20, marginLeft:20,marginRight:20}}full rounded info> */}
-                <Button onPress={() => this.props.navigation.navigate('AwalShinta')}   style = {{marginTop: 40, marginBottom: 20, marginLeft:20,marginRight:20}}full rounded info>
+                  <Button onPress ={() => this.button()}  style = {{marginTop: 40, marginBottom: 20, marginLeft:20,marginRight:20}}full rounded info>
+                {/* <Button onPress={() => this.props.navigation.navigate('AwalShinta')}   style = {{marginTop: 40, marginBottom: 20, marginLeft:20,marginRight:20}}full rounded info> */}
                   <Text>Login</Text>
                 </Button>
                

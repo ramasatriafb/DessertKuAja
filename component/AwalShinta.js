@@ -4,11 +4,25 @@ import BerandaShinta from './berandaShinta/BerandaShinta'
 import ProfilShinta from './berandaShinta/ProfilShinta'
 
 import Images from 'asset/Images';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Alert} from 'react-native';
 export default class AwalShinta extends Component {
   static navigationOptions = {
     header:null
   }
+
+  button() {
+      setTimeout(() => {
+      Alert.alert(
+        'Logout',
+        'Anda Yakin untuk Logout ?',
+        [
+          {text: 'NO',  style: 'cancel'},
+          {text: 'YES', onPress: () => this.props.navigation.goBack()},
+        ]
+      );
+    },5000)
+   }
+
   render() {
     return (
       <Container>
@@ -24,7 +38,7 @@ export default class AwalShinta extends Component {
           <Button
               hasText
               transparent
-              onPress={() => this.props.navigation.goBack()}
+              onPress={() => this.button()} 
             >
               <Text>Logout</Text>
           </Button>

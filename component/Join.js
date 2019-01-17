@@ -59,7 +59,7 @@ export default class Join extends Component {
     }
 
     button() {
-
+      setTimeout(() => {
       Alert.alert(
         'Join Sukses',
         'Kamu Berhasil Join :D',
@@ -68,7 +68,7 @@ export default class Join extends Component {
           {text: 'YES', onPress: () => this.props.navigation.goBack()},
         ]
       );
-      
+    },5000)
      }
 
     // UserLoginFunction = () =>{
@@ -174,8 +174,7 @@ export default class Join extends Component {
                 </Item> */}
                 <Item floatingLabel>
                   <Label>Password Kamu</Label>
-                  <Input secureTextEntry />
-                  <Input onChangeText={(val) => this.setState({password:val})}/>
+                  <Input secureTextEntry onChangeText={(val) => this.setState({password:val})}/>
                 </Item>
                 <Item picker>
                 <Label>Jenis Kelamin Anda </Label>
