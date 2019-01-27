@@ -20,7 +20,14 @@ import BananaCake from './component/berandaShinta/BananaCake'
 
 import CinnamonIce from './component/berandaShinta/CinnamonIce'
 
+
+import AwalGuruh from './component/AwalGuruh'
+import BerandaGuruh from './component/berandaGuruh/BerandaGuruh'
 import CarrotCake from './component/berandaShinta/CarrotCake'
+import BestBrownies from './component/berandaGuruh/BestBrownies'
+import GermanApple from './component/berandaGuruh/GermanApple'
+import Sufgiyanot from './component/berandaGuruh/Sufgiyanot'
+import OurBest from './component/berandaGuruh/OurBest'
 
 import Main from './Main'
 

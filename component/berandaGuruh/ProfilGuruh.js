@@ -19,65 +19,18 @@ import {
   Title, 
   Card,
   CardItem} from 'native-base';
-import {StyleSheet, AsyncStorage} from 'react-native';
+import {StyleSheet} from 'react-native';
 import Images from 'asset/Images';
-
-const API = 'https://desserts.darajati.my.id/index.php/user/detail/';
-
-export default class ProfilShinta extends Component {
-  
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      hits: [],
-    };
-  }
-
-   async getItem(key) {
-    try {
-        return await AsyncStorage.getItem(key);
-    } catch (error) {
-        console.log("Error saving data" + error);
-        return null
-    }
-}
-  componentDidMount() {
-    this.getItem('user_id').then((user_id)=> {
-      const USER_ID = user_id;
-    }).catch((error)=> {
-      console.log(error);
-    });
-    this.getItem('token').then((token)=> {
-      const TOKEN = token;
-    }).catch((error)=> {
-      console.log(error);
-    });
-    console.log(USER_ID);
-    console.log(TOKEN);
-    fetch(API + USER_ID, {
-      method: 'POST',
-       headers :{ 
-       'Client-Service'  : 'frontend-client',
-       'Auth-Key'  : 'dessertkuajaapi',
-       'Content-Type': 'applications/json',
-       'User-ID' : USER_ID,
-       'Authorization': TOKEN, 
-     }
-    })
-      .then(response => response.json())
-      .then(data => this.setState({ hits: data.hits }));
-  }
-
-
+export default class ProfilGuruh extends Component {
+    
     render() {
-      const { hits } = this.state;
+
     return (
       <Container>
        
        <Content padder>
        <Thumbnail large style={{ alignSelf: "center", height: 120, width: 120, }} source={Images.userIcon}/>
-       {hits.map(hit =>
+   
        <Card style = {{marginBottom: 15}}>
          <CardItem header bordered>
            <Text> Data Pribadi Anda </Text>
@@ -86,19 +39,19 @@ export default class ProfilShinta extends Component {
             <Body>
                <Item >
                <Label>Nama </Label>
-                 <Text>{hit.nama}</Text>
+                 <Text>Guruh</Text>
                </Item>
                <Item >
                <Label>Username </Label>
-                 <Text>{hit.username}</Text>
+                 <Text>guruh</Text>
                </Item>
                <Item >
                <Label>Jenis Kelamin</Label>
-                 <Text>{hit.jenis_kelamin}</Text>
+                 <Text>Pria</Text>
                </Item>
                <Item >
                <Label>Tanggal Lahir </Label>
-                 <Text>{hit.tgl_lahir}</Text>
+                 <Text>01/01/1999</Text>
                </Item>
              </Body>
            </CardItem>
@@ -110,28 +63,28 @@ export default class ProfilShinta extends Component {
              <Body>
                <Item picker>
                  <Label>Apakah Anda Diabet ? </Label>
-                <Text>{hit.diabet}</Text>
+                <Text>Ya</Text>
                </Item>
                
                <Item >
                <Label>Asam Urat</Label>
-                 <Text>{hit.asam_urat}</Text>
+                 <Text>9.5</Text>
                </Item>
                <Item >
                <Label>Gula Darah</Label>
-                 <Text>{hit.gula_darah}</Text>
+                 <Text>241</Text>
                </Item>
                <Item >
                <Label>HDL</Label>
-                 <Text>{hit.hdl}</Text>
+                 <Text>59</Text>
                </Item>
                <Item >
                <Label>LDL</Label>
-                 <Text>{hit.ldl}</Text>
+                 <Text>135</Text>
                </Item>
                <Item >
                <Label>Trigliserida</Label>
-                 <Text>{hit.trigliserida}</Text>
+                 <Text>223</Text>
                </Item>
              </Body>
          </CardItem>
@@ -142,9 +95,8 @@ export default class ProfilShinta extends Component {
          <Button onPress={() => this.props.navigation.goBack()} style = {{marginTop: 20, marginBottom: 20, marginLeft:20,marginRight:20}}full rounded danger>
            <Text>Batal</Text>
          </Button> */}
-         
+
          </Card>
-          )}
        </Content>
      </Container>
    );

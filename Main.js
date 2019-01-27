@@ -13,6 +13,8 @@ import Resep1 from './component/beranda/Resep1'
 
 import AwalShinta from './component/AwalShinta'
 
+import AwalGuruh from './component/AwalGuruh'
+
 import BoardWalnut from './component/berandaShinta/BoardWalnut'
 import CarrotCake from './component/berandaShinta/CarrotCake'
 import PecanPie from './component/berandaShinta/PecanPie'
@@ -20,6 +22,11 @@ import DoublePumpkin from './component/berandaShinta/DoublePumpkin'
 import BananaCake from './component/berandaShinta/BananaCake'
 import CinnamonIce from './component/berandaShinta/CinnamonIce'
 import DeepCake from './component/berandaShinta/DeepCake'
+
+import BestBrownies from './component/berandaGuruh/BestBrownies'
+import GermanApple from './component/berandaGuruh/GermanApple'
+import Sufgiyanot from './component/berandaGuruh/Sufgiyanot'
+import OurBest from './component/berandaGuruh/OurBest'
 
 
 const Routes = createStackNavigator({
@@ -65,6 +72,21 @@ const Routes = createStackNavigator({
   DeepCake:{
     screen: DeepCake
   },
+  AwalGuruh: {
+    screen: AwalGuruh
+  },
+  BestBrownies:{
+    screen: BestBrownies
+  },
+  GermanApple:{
+    screen: GermanApple
+  },
+  Sufgiyanot:{
+    screen: Sufgiyanot
+  },
+  OurBest:{
+    screen: OurBest
+  }
 
 });
 const Routing = createAppContainer(Routes);

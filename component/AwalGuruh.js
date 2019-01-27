@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { Container, Header, Tab, Tabs, TabHeading, Icon, Text, Left, Right, Body, Title,Button, Thumbnail } from 'native-base';
-import BerandaShinta from './berandaShinta/BerandaShinta'
-import ProfilShinta from './berandaShinta/ProfilShinta'
+import BerandaGuruh from './berandaGuruh/BerandaGuruh'
+import ProfilGuruh from './berandaGuruh/ProfilGuruh'
 
 import Images from 'asset/Images';
-import {StyleSheet, Alert, AsyncStorage} from 'react-native';
-export default class AwalShinta extends Component {
+import {StyleSheet, Alert} from 'react-native';
+export default class AwalGuruh extends Component {
   static navigationOptions = {
     header:null
   }
-
   async userLogout(){
     try{
       await AsyncStorage.removeItem('user_id');
@@ -63,7 +62,7 @@ export default class AwalShinta extends Component {
               </TabHeading>
             }
           >
-            <BerandaShinta />
+            <BerandaGuruh />
           </Tab>
           <Tab
             heading={
@@ -72,7 +71,7 @@ export default class AwalShinta extends Component {
               </TabHeading>
             }
           >
-            <ProfilShinta />
+            <ProfilGuruh />
           </Tab>
          
         </Tabs>
