@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, Header, Tab, Tabs, TabHeading, Icon, Text, Left, Right, Body, Title,Button, Thumbnail } from 'native-base';
 import BerandaShinta from './berandaShinta/BerandaShinta'
 import ProfilShinta from './berandaShinta/ProfilShinta'
-
+import Edit from './Edit'
 import Images from 'asset/Images';
 import {StyleSheet, Alert, AsyncStorage} from 'react-native';
 export default class AwalShinta extends Component {
@@ -73,6 +73,15 @@ export default class AwalShinta extends Component {
             }
           >
             <ProfilShinta />
+          </Tab>
+          <Tab
+            heading={
+              <TabHeading>
+                <Icon name="person" />
+              </TabHeading>
+            }
+          >
+            <Edit />
           </Tab>
          
         </Tabs>

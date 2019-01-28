@@ -21,16 +21,79 @@ import {
   CardItem} from 'native-base';
 import {StyleSheet} from 'react-native';
 import Images from 'asset/Images';
+
+const API = 'https://desserts.darajati.my.id/index.php/user/detail/';
 export default class ProfilGuruh extends Component {
     
-    render() {
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      hit: [],
+      user_id:'',
+      token: ''
+     
+    };
+  }
+
+  
+  
+   async getItem(key) {
+    try {
+         let ob =  await AsyncStorage.getItem(key);
+        return ob;
+    } catch (error) {
+        console.log("Error saving data" + error);
+        return null
+    }
+}
+
+
+
+      
+
+
+componentDidMount(){
+  this.getItem('user_id').then((user_id) => {
+    this.getItem('token').then((token) => {      
+      console.log(user_id);
+      console.log(token);
+      fetch(API+user_id, {
+    method: 'GET',
+    headers :{ 
+    'Client-Service'  : 'frontend-client',
+    'Auth-Key'  : 'dessertkuajaapi',
+    'Content-Type': 'applications/json',
+    'User-ID': user_id,
+    'Authorization': token
+  },
+})
+    .then((response) => response.json()).then(
+      (responseJson) => {
+        this.setState({ hit: responseJson[0] })
+        
+      })
+    .catch((error) =>{
+      console.error(error);
+    });
+
+    }) 
+}).catch(error => {
+    console.log(error);
+});
+}
+
+
+
+    render() {
+      const { hit } = this.state;
+      console.log(hit);
     return (
       <Container>
        
        <Content padder>
        <Thumbnail large style={{ alignSelf: "center", height: 120, width: 120, }} source={Images.userIcon}/>
-   
+       {/* {hits.map(hit => */}
        <Card style = {{marginBottom: 15}}>
          <CardItem header bordered>
            <Text> Data Pribadi Anda </Text>
@@ -39,19 +102,19 @@ export default class ProfilGuruh extends Component {
             <Body>
                <Item >
                <Label>Nama </Label>
-                 <Text>Guruh</Text>
+                 <Text>{hit.nama}</Text>
                </Item>
                <Item >
                <Label>Username </Label>
-                 <Text>guruh</Text>
+                 <Text>{hit.username}</Text>
                </Item>
                <Item >
                <Label>Jenis Kelamin</Label>
-                 <Text>Pria</Text>
+                 <Text>{hit.jenis_kelamin}</Text>
                </Item>
                <Item >
                <Label>Tanggal Lahir </Label>
-                 <Text>01/01/1999</Text>
+                 <Text>{hit.tgl_lahir}</Text>
                </Item>
              </Body>
            </CardItem>
@@ -63,28 +126,28 @@ export default class ProfilGuruh extends Component {
              <Body>
                <Item picker>
                  <Label>Apakah Anda Diabet ? </Label>
-                <Text>Ya</Text>
+                <Text>{hit.diabet}</Text>
                </Item>
                
                <Item >
                <Label>Asam Urat</Label>
-                 <Text>9.5</Text>
+                 <Text>{hit.asam_urat}</Text>
                </Item>
                <Item >
                <Label>Gula Darah</Label>
-                 <Text>241</Text>
+                 <Text>{hit.gula_darah}</Text>
                </Item>
                <Item >
                <Label>HDL</Label>
-                 <Text>59</Text>
+                 <Text>{hit.hdl}</Text>
                </Item>
                <Item >
                <Label>LDL</Label>
-                 <Text>135</Text>
+                 <Text>{hit.ldl}</Text>
                </Item>
                <Item >
                <Label>Trigliserida</Label>
-                 <Text>223</Text>
+                 <Text>{hit.trigliserida}</Text>
                </Item>
              </Body>
          </CardItem>
@@ -95,8 +158,9 @@ export default class ProfilGuruh extends Component {
          <Button onPress={() => this.props.navigation.goBack()} style = {{marginTop: 20, marginBottom: 20, marginLeft:20,marginRight:20}}full rounded danger>
            <Text>Batal</Text>
          </Button> */}
-
+         
          </Card>
+          {/* )} */}
        </Content>
      </Container>
    );

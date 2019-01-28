@@ -28,7 +28,7 @@ import BestBrownies from './component/berandaGuruh/BestBrownies'
 import GermanApple from './component/berandaGuruh/GermanApple'
 import Sufgiyanot from './component/berandaGuruh/Sufgiyanot'
 import OurBest from './component/berandaGuruh/OurBest'
-
+import Edit from  './component/Edit'
 import Main from './Main'
 
 AppRegistry.registerComponent(appName, () => Main);

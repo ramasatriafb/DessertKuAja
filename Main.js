@@ -28,7 +28,7 @@ import GermanApple from './component/berandaGuruh/GermanApple'
 import Sufgiyanot from './component/berandaGuruh/Sufgiyanot'
 import OurBest from './component/berandaGuruh/OurBest'
 
-
+import Edit from './component/Edit'
 const Routes = createStackNavigator({
   Splash: {
     screen: Splash
@@ -86,6 +86,9 @@ const Routes = createStackNavigator({
   },
   OurBest:{
     screen: OurBest
+  },
+  Edit:{
+    screen: Edit
   }
 
 });

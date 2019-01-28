@@ -19,19 +19,20 @@ import {
   Title, 
   Card,
   CardItem} from 'native-base';
-import { StyleSheet, Alert } from 'react-native';
+import { StyleSheet, Alert ,AsyncStorage} from 'react-native';
+import { createStackNavigator, createAppContainer } from 'react-navigation'; 
 import Images from 'asset/Images';
 
-export default class Join extends Component {
+const API = 'https://desserts.darajati.my.id/index.php/user/update/';
+
+export default class Edit extends Component {
     static navigationOptions = {
       header:null
     }
     constructor(props) {
         super(props);
         this.state = {
-          nama: "",
-          usernamee: "",
-          passwordd: "",
+          
           jenis_kelamin: "",
           tanggal_lahir: "",
           diabet: "",
@@ -39,7 +40,10 @@ export default class Join extends Component {
           gula_darah: "",
           ldl: "",
           hdl: "",
-          trigliserida: ""
+          trigliserida: "",
+
+      user_id:'',
+      token: ''
 
         };
       
@@ -54,28 +58,22 @@ export default class Join extends Component {
           diabet: value
         });
     } 
-    onSignUpPressed(){
-      console.log(this.state);
+    
+    async getItem(key) {
+        try {
+             let ob =  await AsyncStorage.getItem(key);
+            return ob;
+        } catch (error) {
+            console.log("Error saving data" + error);
+            return null
+        }
     }
 
-    button() {
-      setTimeout(() => {
-      Alert.alert(
-        'Join Sukses',
-        'Kamu Berhasil Join :D',
-        [
-          // {text: 'NO', onPress: () => console.warn('NO Pressed'), style: 'cancel'},
-          {text: 'YES', onPress: () => this.props.navigation.goBack()},
-        ]
-      );
-    },5000)
-     }
+    
 
-    UserJoinFunction = () =>{
+    UserEditFunction = () =>{
  
-      const { usernamee }  = this.state ;
-      const { passwordd }  = this.state;
-      const { nama }  = this.state;
+      
       const { jenis_kelamin }  = this.state ;
       console.log(jenis_kelamin);
       const { tanggal_lahir }  = this.state
@@ -86,53 +84,56 @@ export default class Join extends Component {
       const { hdl }  = this.state;
       const { ldl }  = this.state;
       const { trigliserida }  = this.state;
-      // console.log(this.state);
+      console.log(this.state);
       
-       
-      fetch('https://desserts.darajati.my.id/index.php/auth/signup', {
-        method: 'POST',
+      this.getItem('user_id').then((user_id) => {
+        this.getItem('token').then((token) => {      
+          console.log(user_id);
+          console.log(token);
+          fetch(API+user_id, {
+        method: 'PUT',
         headers :{ 
         'Client-Service'  : 'frontend-client',
         'Auth-Key'  : 'dessertkuajaapi',
         'Content-Type': 'applications/json',
+        'User-ID': user_id,
+        'Authorization': token
       },
-        body: JSON.stringify({
+      body: JSON.stringify({
        
-          username	:	usernamee,
-          password : passwordd,
-          nama	: nama,
-          jenis_kelamin	: jenis_kelamin,
-          tgl_lahir	: tanggal_lahir,
-          diabet	: diabet,
-          asam_urat	: asam_urat,
-          gula_darah : gula_darah,
-          hdl	: hdl,
-          ldl	: ldl,
-          trigliserida	: trigliserida
-       
-        })
-       
-      }).then((response) => response.json())
-      .then((responseJson) => {
-console.log(responseJson);
-       if(responseJson.message === 'Data has been created.')
-        {
-          console.log('good');
-          Alert.alert(
-            'Data Berhasil Disimpan',
-            'Selamat Datang ',
-            [
-              // {text: 'NO', onPress: () => console.warn('NO Pressed'), style: 'cancel'},
-              {text: 'OK', onPress: () => this.props.navigation.goBack()},
-            ]
-          );
-
-        }
         
-
-      }).catch((error) => {
-        console.error(error);
-      });
+        jenis_kelamin	: jenis_kelamin,
+        tgl_lahir	: tanggal_lahir,
+        diabet	: diabet,
+        asam_urat	: asam_urat,
+        gula_darah : gula_darah,
+        hdl	: hdl,
+        ldl	: ldl,
+        trigliserida	: trigliserida
+     
+      })
+    })
+        .then((response) => response.json()).then(
+          (responseJson) => {
+            if(responseJson.message === 'Data has been updated.')
+            {
+              console.log('good');
+              console.log(responseJson;
+              console.log(responseJson.message;)
+              
+    
+            }
+            
+          })
+        .catch((error) =>{
+          console.error(error);
+        });
+    
+        }) 
+    }).catch(error => {
+        console.log(error);
+    });
+      
  
   }
 
@@ -140,7 +141,7 @@ console.log(responseJson);
 
     return (
       <Container>
-       <Header style={styles.header}>
+       {/* <Header style={styles.header}>
                 <Left style={{flex:1}}>
                 <Button onPress={() => this.props.navigation.goBack()} transparent textStyle={{color: '#87838B'}}>
                   <Icon name='arrow-back' />
@@ -149,7 +150,7 @@ console.log(responseJson);
                 <Body style={{flex:2}}>
                     <Title>DessertKuAja</Title>
                 </Body>
-        </Header>
+        </Header> */}
         
         <Content padder>
         <Thumbnail large style={{ alignSelf: "center", height: 120, width: 120, }} source={Images.userIcon}/>
@@ -160,23 +161,23 @@ console.log(responseJson);
           </CardItem>
           <CardItem bordered>
              <Body>
-                <Item floatingLabel>
+                {/* <Item floatingLabel>
                   <Label>Nama Kamu </Label>
                   <Input onChangeText={(val) => this.setState({nama:val})}/>
                 </Item>
                 <Item floatingLabel>
                   <Label>Username Kamu</Label>
                   <Input onChangeText={(val) => this.setState({usernamee:val})}/>
-                </Item>
+                </Item> */}
                 {/* <Text>{this.state.nama}</Text> */}
                 {/* <Item floatingLabel>
                   <Label>Email Kamu</Label>
                   <Input onChangeText={(val) => this.setState({email:val})}/>
                 </Item> */}
-                <Item floatingLabel>
+                {/* <Item floatingLabel>
                   <Label>Password Kamu</Label>
                   <Input secureTextEntry onChangeText={(val) => this.setState({passwordd:val})}/>
-                </Item>
+                </Item> */}
                 <Item Picker>
                 {/* <Item floatingLabel></Item> */}
                 <Label>Jenis Kelamin Anda </Label>
@@ -244,16 +245,14 @@ console.log(responseJson);
           </CardItem>
 
           {/* <Button onPress ={() => this.button()} style = {{marginTop: 20, marginLeft:20,marginRight:20}} full rounded info> */}
-          <Button onPress ={this.UserJoinFunction}  style = {{marginTop: 40, marginBottom: 20, marginLeft:20,marginRight:20}}full rounded info>
+          <Button onPress ={this.UserEditFunction}  style = {{marginTop: 40, marginBottom: 20, marginLeft:20,marginRight:20}}full rounded info>
                 
-            <Text>Join</Text>
+            <Text>Edit</Text>
           </Button>
            {/* <Button style = {{marginTop: 20, marginLeft:20,marginRight:20}} full rounded info>
             <Text>Join</Text>
           </Button> */}
-          <Button onPress={() => this.props.navigation.goBack()} style = {{marginTop: 20, marginBottom: 20, marginLeft:20,marginRight:20}}full rounded danger>
-            <Text>Batal</Text>
-          </Button>
+         
 
           </Card>
         </Content>

@@ -49,11 +49,12 @@ export default class ProfilShinta extends Component {
     };
   }
 
-  
+  onRowPress() {
+    this.props.navigation && this.props.navigation.navigate('Edit');
+  }
   
    async getItem(key) {
     try {
-//         return await AsyncStorage.getItem(key);
          let ob =  await AsyncStorage.getItem(key);
         return ob;
     } catch (error) {
@@ -69,9 +70,6 @@ export default class ProfilShinta extends Component {
 
 componentDidMount(){
   this.getItem('user_id').then((user_id) => {
-    // this.setState({
-    //     : user_id
-    // });   
     this.getItem('token').then((token) => {      
       console.log(user_id);
       console.log(token);
@@ -86,7 +84,6 @@ componentDidMount(){
   },
 })
     .then((response) => response.json()).then(
-      // data => this.setState({ hits: data.hits })
       (responseJson) => {
         this.setState({ hit: responseJson[0] })
         
@@ -105,6 +102,7 @@ componentDidMount(){
 
     render() {
       const { hit } = this.state;
+      // const { navigate } = this.props.navigation.navigate;
       console.log(hit);
     return (
       <Container>
@@ -169,16 +167,8 @@ componentDidMount(){
                </Item>
              </Body>
          </CardItem>
-
-         {/* <Button style = {{marginTop: 20, marginLeft:20,marginRight:20}} full rounded warning>
-           <Text>Simpan</Text>
-         </Button>
-         <Button onPress={() => this.props.navigation.goBack()} style = {{marginTop: 20, marginBottom: 20, marginLeft:20,marginRight:20}}full rounded danger>
-           <Text>Batal</Text>
-         </Button> */}
-         
+   
          </Card>
-          {/* )} */}
        </Content>
      </Container>
    );

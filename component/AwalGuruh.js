@@ -73,7 +73,15 @@ export default class AwalGuruh extends Component {
           >
             <ProfilGuruh />
           </Tab>
-         
+          <Tab
+            heading={
+              <TabHeading>
+                <Icon name="person" />
+              </TabHeading>
+            }
+          >
+            <Edit />
+          </Tab>
         </Tabs>
           
       </Container>
