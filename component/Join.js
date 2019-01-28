@@ -30,11 +30,11 @@ export default class Join extends Component {
         super(props);
         this.state = {
           nama: "",
-          username: "",
-          password: "",
-          jenis_kelamin: undefined,
+          usernamee: "",
+          passwordd: "",
+          jenis_kelamin: "",
           tanggal_lahir: "",
-          diabet: undefined,
+          diabet: "",
           asam_urat: "",
           gula_darah: "",
           ldl: "",
@@ -71,69 +71,70 @@ export default class Join extends Component {
     },5000)
      }
 
-    // UserLoginFunction = () =>{
+    UserJoinFunction = () =>{
  
-    //   const { UserName }  = this.state.username ;
-    //   const { UserPassword }  = this.state.password ;
-    //   const { Nama }  = this.state.nama ;
-    //   const { jKelamin }  = this.state.jenis_kelamin ;
-    //   const { tglLahir }  = this.state.tanggal_lahir ;
-    //   const { Diabet }  = this.state.diabet ;
-    //   const { AsamUrat }  = this.state.asam_urat ;
-    //   const { GulaDarah }  = this.state.gula_darah ;
-    //   const { HDL }  = this.state.hdl ;
-    //   const { LDL }  = this.state.ldl ;
-    //   const { Trigliserida }  = this.state.trigliserida ;
+      const { usernamee }  = this.state ;
+      const { passwordd }  = this.state;
+      const { nama }  = this.state;
+      const { jenis_kelamin }  = this.state ;
+      console.log(jenis_kelamin);
+      const { tanggal_lahir }  = this.state
+      const { diabet }  = this.state ;
+      console.log(diabet);
+      const { asam_urat }  = this.state ;
+      const { gula_darah }  = this.state ;
+      const { hdl }  = this.state;
+      const { ldl }  = this.state;
+      const { trigliserida }  = this.state;
+      console.log(this.state);
       
-      
-    //  fetch('https://ramasatriafb.000webhostapp.com/index.php/auth/signup', {
-    //    method: 'POST',
-    //    headers: {
-    //     'Client-Service': 'frontend-client',
-    //     'Auth-Key': 'dessertkuajaapi',
-    //     'Content-Type': 'application/json',
-         
-         
-    //    },
-    //    body: JSON.stringify({
+       
+      fetch('https://desserts.darajati.my.id/index.php/auth/signup', {
+        method: 'POST',
+        headers :{ 
+        'Client-Service'  : 'frontend-client',
+        'Auth-Key'  : 'dessertkuajaapi',
+        'Content-Type': 'applications/json',
+      },
+        body: JSON.stringify({
+       
+          username	:	usernamee,
+          password : passwordd,
+          nama	: nama,
+          jenis_kelamin	: jenis_kelamin,
+          tgl_lahir	: tanggal_lahir,
+          diabet	: diabet,
+          asam_urat	: asam_urat,
+          gula_darah : gula_darah,
+          hdl	: hdl,
+          ldl	: ldl,
+          trigliserida	: trigliserida
+       
+        })
+       
+      }).then((response) => response.json())
+      .then((responseJson) => {
+console.log(responseJson);
+       if(responseJson.message === 'Data has been created.')
+        {
+          console.log('good');
+          Alert.alert(
+            'Data Berhasil Disimpan',
+            'Selamat Datang ',
+            [
+              // {text: 'NO', onPress: () => console.warn('NO Pressed'), style: 'cancel'},
+              {text: 'OK', onPress: () => this.props.navigation.goBack()},
+            ]
+          );
 
-    //      username: UserName,
-    //      password: UserPassword,
-    //      nama: Nama,
-    //      jenis_kelamin: jKelamin,
-    //      tgl_lahir: tglLahir,
-    //      diabet: Diabet,
-    //      asam_urat: AsamUrat,
-    //      gula_darah: GulaDarah,
-    //      hdl: HDL,
-    //      ldl: LDL,
-    //      trigliserida: Trigliserida
-      
-    //    })
-    //   //  console.log(body);
-      
-    //  }).then((response) => response.json())
-    //        .then((responseJson) => {
-    //         console.warn(xhr.responseJson)
-    //          // If server response message same as Data Matched
-    //         // if(responseJson === 'Data Matched')
-    //         //  {
-      
-    //         //      //Then open Profile activity and send user email to profile activity.
-    //         //      this.props.navigation.navigate('Second', { Email: UserEmail });
-      
-    //         //  }
-    //         //  else{
-      
-    //         //    Alert.alert(responseJson);
-    //         //  }
-      
-    //        }).catch((error) => {
-    //          console.error(error);console.warn(xhr.response);
-    //        });
-      
-    //    }
+        }
+        
 
+      }).catch((error) => {
+        console.error(error);
+      });
+ 
+  }
 
     render() {
 
@@ -165,7 +166,7 @@ export default class Join extends Component {
                 </Item>
                 <Item floatingLabel>
                   <Label>Username Kamu</Label>
-                  <Input onChangeText={(val) => this.setState({username:val})}/>
+                  <Input onChangeText={(val) => this.setState({usernamee:val})}/>
                 </Item>
                 {/* <Text>{this.state.nama}</Text> */}
                 {/* <Item floatingLabel>
@@ -174,10 +175,13 @@ export default class Join extends Component {
                 </Item> */}
                 <Item floatingLabel>
                   <Label>Password Kamu</Label>
-                  <Input secureTextEntry onChangeText={(val) => this.setState({password:val})}/>
+                  <Input secureTextEntry onChangeText={(val) => this.setState({passwordd:val})}/>
                 </Item>
-                <Item picker>
+                <Item Picker>
+                {/* <Item floatingLabel></Item> */}
                 <Label>Jenis Kelamin Anda </Label>
+                {/* <Input onChangeText={(val) => this.setState({jenis_kelamin:val})}/> */}
+               
                   <Picker
                     mode="dropdown"
                     iosIcon={<Icon name="ios-arrow-down-outline" />}
@@ -201,18 +205,20 @@ export default class Join extends Component {
             </CardItem>
             <CardItem bordered>
               <Body>
-                <Item picker>
+              <Item picker>
                   <Label>Apakah Anda Diabet ? </Label>
                   <Picker
                     mode="dropdown"
                     iosIcon={<Icon name="ios-arrow-down-outline" />}
                     style={{ width: undefined }}
-                    selectedValue={this.state.diabet}
+                    //selectedValue={this.state.diabet}
                     onValueChange={this.onValueChange3.bind(this)}
                   >
                     <Picker.Item label="Ya" value="Ya" />
                     <Picker.Item label="Tidak" value="Tidak" />
                   </Picker>
+                  
+                   {/* <Input onChangeText={(val) => this.setState({diabet:val})}/> */}
                 </Item>
                 <Item floatingLabel>
                   <Label>Asam Urat Kamu (mg/dL)</Label>
@@ -237,7 +243,9 @@ export default class Join extends Component {
               </Body>
           </CardItem>
 
-          <Button onPress ={() => this.button()} style = {{marginTop: 20, marginLeft:20,marginRight:20}} full rounded info>
+          {/* <Button onPress ={() => this.button()} style = {{marginTop: 20, marginLeft:20,marginRight:20}} full rounded info> */}
+          <Button onPress ={this.UserJoinFunction}  style = {{marginTop: 40, marginBottom: 20, marginLeft:20,marginRight:20}}full rounded info>
+                
             <Text>Join</Text>
           </Button>
            {/* <Button style = {{marginTop: 20, marginLeft:20,marginRight:20}} full rounded info>

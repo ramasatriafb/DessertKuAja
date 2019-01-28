@@ -23,6 +23,18 @@ import {StyleSheet, AsyncStorage} from 'react-native';
 import Images from 'asset/Images';
 
 const API = 'https://desserts.darajati.my.id/index.php/user/detail/';
+// const USER_ID = 20;
+
+// const USER_ID = async () => {
+//   let userId = '';
+  // try {
+  //   userId = await AsyncStorage.getItem('user_id');
+  // } catch (error) {
+  //   // Error retrieving data
+  //   console.log(error.message);
+  // }
+  // return userId;
+// }
 
 export default class ProfilShinta extends Component {
   
@@ -30,54 +42,76 @@ export default class ProfilShinta extends Component {
     super(props);
 
     this.state = {
-      hits: [],
+      hit: [],
+      user_id:'',
+      token: ''
+     
     };
   }
 
+  
+  
    async getItem(key) {
     try {
-        return await AsyncStorage.getItem(key);
+//         return await AsyncStorage.getItem(key);
+         let ob =  await AsyncStorage.getItem(key);
+        return ob;
     } catch (error) {
         console.log("Error saving data" + error);
         return null
     }
 }
-  componentDidMount() {
-    this.getItem('user_id').then((user_id)=> {
-      const USER_ID = user_id;
-    }).catch((error)=> {
-      console.log(error);
+
+
+
+      
+
+
+componentDidMount(){
+  this.getItem('user_id').then((user_id) => {
+    // this.setState({
+    //     : user_id
+    // });   
+    this.getItem('token').then((token) => {      
+      console.log(user_id);
+      console.log(token);
+      fetch(API+user_id, {
+    method: 'GET',
+    headers :{ 
+    'Client-Service'  : 'frontend-client',
+    'Auth-Key'  : 'dessertkuajaapi',
+    'Content-Type': 'applications/json',
+    'User-ID': user_id,
+    'Authorization': token
+  },
+})
+    .then((response) => response.json()).then(
+      // data => this.setState({ hits: data.hits })
+      (responseJson) => {
+        this.setState({ hit: responseJson[0] })
+        
+      })
+    .catch((error) =>{
+      console.error(error);
     });
-    this.getItem('token').then((token)=> {
-      const TOKEN = token;
-    }).catch((error)=> {
-      console.log(error);
-    });
-    console.log(USER_ID);
-    console.log(TOKEN);
-    fetch(API + USER_ID, {
-      method: 'POST',
-       headers :{ 
-       'Client-Service'  : 'frontend-client',
-       'Auth-Key'  : 'dessertkuajaapi',
-       'Content-Type': 'applications/json',
-       'User-ID' : USER_ID,
-       'Authorization': TOKEN, 
-     }
-    })
-      .then(response => response.json())
-      .then(data => this.setState({ hits: data.hits }));
-  }
+
+    }) 
+}).catch(error => {
+    console.log(error);
+});
+}
+
 
 
     render() {
-      const { hits } = this.state;
+      const { hit } = this.state;
+      console.log(hit);
     return (
       <Container>
        
        <Content padder>
        <Thumbnail large style={{ alignSelf: "center", height: 120, width: 120, }} source={Images.userIcon}/>
-       {hits.map(hit =>
+       {/* {hits.map(hit => */}
        <Card style = {{marginBottom: 15}}>
          <CardItem header bordered>
            <Text> Data Pribadi Anda </Text>
@@ -144,7 +178,7 @@ export default class ProfilShinta extends Component {
          </Button> */}
          
          </Card>
-          )}
+          {/* )} */}
        </Content>
      </Container>
    );
