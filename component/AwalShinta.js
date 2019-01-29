@@ -32,7 +32,7 @@ export default class AwalShinta extends Component {
           {text: 'YES', onPress: () => this.userLogout()},
         ]
       );
-    },5000)
+    },2000)
    }
 
   render() {

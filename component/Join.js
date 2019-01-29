@@ -211,7 +211,7 @@ console.log(responseJson);
                     mode="dropdown"
                     iosIcon={<Icon name="ios-arrow-down-outline" />}
                     style={{ width: undefined }}
-                    //selectedValue={this.state.diabet}
+                    selectedValue={this.state.diabet}
                     onValueChange={this.onValueChange3.bind(this)}
                   >
                     <Picker.Item label="Ya" value="Ya" />

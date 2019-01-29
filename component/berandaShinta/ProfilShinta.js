@@ -48,10 +48,11 @@ export default class ProfilShinta extends Component {
      
     };
   }
-
-  onRowPress() {
-    this.props.navigation && this.props.navigation.navigate('Edit');
-  }
+  reload = () => 
+  {
+      //RELOAD COMPONENT
+      this.componentDidMount();
+  };
   
    async getItem(key) {
     try {
@@ -167,7 +168,10 @@ componentDidMount(){
                </Item>
              </Body>
          </CardItem>
-   
+         <Button onPress ={this.reload}  style = {{marginTop: 40, marginBottom: 20, marginLeft:20,marginRight:20}}full rounded info>
+                
+                <Text>Reload</Text>
+              </Button>
          </Card>
        </Content>
      </Container>

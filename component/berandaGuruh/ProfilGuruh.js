@@ -36,7 +36,11 @@ export default class ProfilGuruh extends Component {
     };
   }
 
-  
+  reload = () => 
+  {
+      //RELOAD COMPONENT
+      this.componentDidMount();
+  };
   
    async getItem(key) {
     try {
@@ -158,6 +162,10 @@ componentDidMount(){
          <Button onPress={() => this.props.navigation.goBack()} style = {{marginTop: 20, marginBottom: 20, marginLeft:20,marginRight:20}}full rounded danger>
            <Text>Batal</Text>
          </Button> */}
+         <Button onPress ={this.reload}  style = {{marginTop: 40, marginBottom: 20, marginLeft:20,marginRight:20}}full rounded info>
+                
+                <Text>Reload</Text>
+              </Button>
          
          </Card>
           {/* )} */}

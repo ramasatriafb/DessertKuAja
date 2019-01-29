@@ -69,7 +69,7 @@ export default class Edit extends Component {
         }
     }
 
-    
+   
 
     UserEditFunction = () =>{
  
@@ -115,14 +115,8 @@ export default class Edit extends Component {
     })
         .then((response) => response.json()).then(
           (responseJson) => {
-            if(responseJson.message === 'Data has been updated.')
-            {
-              console.log('good');
-              console.log(responseJson;
-              console.log(responseJson.message;)
-              
-    
-            }
+              console.log('good')
+              Alert.alert('Berhasil Diedit')
             
           })
         .catch((error) =>{
@@ -212,7 +206,7 @@ export default class Edit extends Component {
                     mode="dropdown"
                     iosIcon={<Icon name="ios-arrow-down-outline" />}
                     style={{ width: undefined }}
-                    //selectedValue={this.state.diabet}
+                    selectedValue={this.state.diabet}
                     onValueChange={this.onValueChange3.bind(this)}
                   >
                     <Picker.Item label="Ya" value="Ya" />
